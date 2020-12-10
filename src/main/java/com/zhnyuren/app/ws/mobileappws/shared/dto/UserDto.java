@@ -28,5 +28,6 @@ public class UserDto implements Serializable {
     private String emailVerificationToken;
 
     private Boolean emailVerificationStatus = false;
+
 }
 

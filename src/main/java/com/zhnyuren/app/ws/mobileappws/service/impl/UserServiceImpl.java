@@ -4,9 +4,10 @@ import com.zhnyuren.app.ws.mobileappws.UserRepository;
 import com.zhnyuren.app.ws.mobileappws.io.entity.UserEntity;
 import com.zhnyuren.app.ws.mobileappws.service.UserService;
 import com.zhnyuren.app.ws.mobileappws.shared.dto.UserDto;
-import com.zhnyuren.app.ws.mobileappws.shared.dto.Utils;
+import com.zhnyuren.app.ws.mobileappws.shared.Utils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,11 +19,15 @@ public class UserServiceImpl implements UserService {
 
     private final Utils utils;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     public UserServiceImpl(final UserRepository userRepository,
-                           final Utils utils) {
+                           final Utils utils,
+                           final BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.utils = utils;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDto, userEntity);
 
-        userEntity.setEncryptedPassword("test");
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userEntity.setUserId(utils.generateUserId(USER_ID_LENGTH));
 
         UserEntity storedUserDetails = userRepository.save(userEntity);
@@ -44,4 +49,5 @@ public class UserServiceImpl implements UserService {
 
         return returnValue;
     }
+
 }

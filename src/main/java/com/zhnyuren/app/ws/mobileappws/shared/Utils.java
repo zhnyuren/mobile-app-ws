@@ -1,4 +1,4 @@
-package com.zhnyuren.app.ws.mobileappws.shared.dto;
+package com.zhnyuren.app.ws.mobileappws.shared;
 
 import org.springframework.stereotype.Component;
 
@@ -24,4 +24,5 @@ public final class Utils {
         }
         return new String(returnValue);
     }
+
 }

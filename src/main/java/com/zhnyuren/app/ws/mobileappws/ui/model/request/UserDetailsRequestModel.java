@@ -14,4 +14,5 @@ public class UserDetailsRequestModel {
     private String email;
 
     private String password;
+
 }
