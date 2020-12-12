@@ -4,7 +4,6 @@ import com.zhnyuren.app.ws.mobileappws.service.UserService;
 import com.zhnyuren.app.ws.mobileappws.shared.dto.UserDto;
 import com.zhnyuren.app.ws.mobileappws.ui.model.request.UserDetailsRequestModel;
 import com.zhnyuren.app.ws.mobileappws.ui.model.response.UserRest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

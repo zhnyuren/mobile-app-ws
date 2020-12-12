@@ -1,6 +1,5 @@
 package com.zhnyuren.app.ws.mobileappws.ui.model.response;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
