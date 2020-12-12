@@ -15,7 +15,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public WebSecurityConfigurer (final UserService userService,
+    public WebSecurityConfigurer(final UserService userService,
                                   final BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -26,11 +26,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                     .disable()
-                    .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/users")
+                .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
                     .permitAll()
                     .anyRequest()
-                    .authenticated();
+                    .authenticated()
+                .and()
+                    .addFilter(new AuthenticationFilter(authenticationManager()));
     }
 
     @Override
