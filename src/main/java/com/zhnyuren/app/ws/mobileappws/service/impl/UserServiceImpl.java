@@ -1,6 +1,6 @@
 package com.zhnyuren.app.ws.mobileappws.service.impl;
 
-import com.zhnyuren.app.ws.mobileappws.UserRepository;
+import com.zhnyuren.app.ws.mobileappws.io.repository.UserRepository;
 import com.zhnyuren.app.ws.mobileappws.io.entity.UserEntity;
 import com.zhnyuren.app.ws.mobileappws.service.UserService;
 import com.zhnyuren.app.ws.mobileappws.shared.dto.UserDto;
@@ -64,4 +64,14 @@ public class UserServiceImpl implements UserService {
         return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
     }
 
+    @Override
+    public UserDto getUser(final String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        if (null == userEntity) {
+            throw new UsernameNotFoundException(email);
+        }
+        UserDto returnValue = new UserDto();
+        BeanUtils.copyProperties(userEntity, returnValue);
+        return returnValue;
+    }
 }

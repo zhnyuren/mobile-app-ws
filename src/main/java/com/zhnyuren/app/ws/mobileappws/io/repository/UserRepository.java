@@ -1,4 +1,4 @@
-package com.zhnyuren.app.ws.mobileappws;
+package com.zhnyuren.app.ws.mobileappws.io.repository;
 
 import com.zhnyuren.app.ws.mobileappws.io.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
